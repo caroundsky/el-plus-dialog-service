@@ -1,0 +1,60 @@
+{
+  "name": "@caroundsky/el-plus-dialog-service",
+  "private": false,
+  "version": "0.0.1",
+  "main": "lib/dialog-service.js",
+  "module": "lib/dialog-service.js",
+  "typings": "lib/types/index.d.ts",
+  "scripts": {
+    "serve": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@vitejs/plugin-vue-jsx": "^1.3.10",
+    "lodash": "^4.17.21",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "typescript": "^4.5.4",
+    "unplugin-element-plus": "^0.4.1",
+    "unplugin-vue-components": "^0.21.0",
+    "vite": "^2.9.9",
+    "vite-plugin-css-injected-by-js": "^1.5.0",
+    "vite-plugin-dts": "^1.4.0",
+    "vite-plugin-imp": "^2.2.0",
+    "vite-plugin-vue-setup-extend": "^0.4.0",
+    "vue-tsc": "^0.34.7"
+  },
+  "dependencies": {
+    "axios": "0.21.1",
+    "element-plus": "^2.2.6",
+    "less": "^4.1.3",
+    "vue": "^3.2.25"
+  },
+  "peerDependencies": {
+    "element-plus": "2.x",
+    "vue": "3.x"
+  },
+  "keywords": [
+    "vite",
+    "element-plus",
+    "dialog-service",
+    "typescript"
+  ],
+  "author": {
+    "name": "@caroundsky"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/caroundsky/el-plus-dialog-service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/caroundsky/el-plus-dialog-service/issues"
+  }
+}
