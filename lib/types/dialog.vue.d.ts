@@ -48,6 +48,14 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {
     hide: () => void;
     close: () => void;
     handleBeforeClose: (done: any) => void;
+    exposeData: {
+        hide: () => void;
+        close: () => void;
+        title: any;
+        buttons: any;
+        fullscreen: any;
+        height: any;
+    };
     ElDialog: import("element-plus/es/utils").SFCWithInstall<import("vue").DefineComponent<{
         readonly appendToBody: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, false, boolean>;
         readonly beforeClose: {

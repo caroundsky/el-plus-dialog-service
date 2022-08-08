@@ -226,14 +226,17 @@ function handleBeforeClose(done: any) {
   }
 }
 
-defineExpose({
+const exposeData = {
   hide,
   close,
   title,
   buttons,
   fullscreen,
   height
-})
+}
+defineExpose(exposeData)
+
+store.setInstance('dialog', exposeData)
 
 onMounted(() => {
   dialogVisible.value = true

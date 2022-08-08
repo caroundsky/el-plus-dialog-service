@@ -26,13 +26,7 @@ const service = (options: DialogConfig = {}, appContext?: AppContext) => {
   App.mount(container)
   document.body.appendChild(container.firstElementChild!)
 
-  const vm = App._instance!
-
-  const instance = {
-    ...vm.exposed!,
-  }
-
-  store.setInstance('dialog', instance)
+  const instance = store.getInstance('dialog')
 
   return instance
 }
