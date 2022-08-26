@@ -9,36 +9,28 @@ import Demo from './demo.vue'
 function showDialog() {
   dialogService({
     title: '测试',
+    height: '30vh',
+    // iframeSrc: 'https://juejin.cn/post/6918921604160290830',
     content: () => <Demo />,
 
-    // buttons: [
-    //   {
-    //     label: '确定 ',
-    //     type: 'primary',
-    //     onClick: ({ vm, ctx, component }) => {
-    //       component.save()
-    //     },
-    //   },
-    // ],
+    // buttons: ({ vm, getFooterBtns }) => {
+    //   return getFooterBtns(cont => cont.setBtn())
+    // },
 
     // buttons: ({ vm, getFooterBtns }) => {
     //   return <div>取消</div>
     // },
 
-    // buttons: () => {
-    //   return [
-    //     {
-    //       label: '确定 ',
-    //       type: 'primary',
-    //       onClick: ({ vm, ctx, component }) => {
-    //         component.save()
-    //       },
-    //     },
-    //   ]
-    // },
-
-    buttons: ({ getFooterBtns }) => {
-      return getFooterBtns(cont => cont.setBtn())
+    buttons: () => {
+      return [
+        {
+          label: '确定 ',
+          type: 'primary',
+          onClick: ({ vm, ctx, component }) => {
+            component.save()
+          },
+        },
+      ]
     },
   })
 }

@@ -81,6 +81,10 @@ export const dialogProps = {
     type: Boolean,
     default: false,
   },
+  resize: {
+    type: Boolean,
+    default: false,
+  },
   canModalClose: {
     type: Boolean,
     default: false,

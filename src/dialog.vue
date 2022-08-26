@@ -16,6 +16,7 @@
     v-on="dialogEvents"
     :close-on-click-modal="canModalClose"
     :close-on-press-escape="canModalClose"
+    ref="dialog"
   >
     <template class="title" #header>
       <div v-if="titleComponent">
@@ -36,9 +37,10 @@
       <template v-else>
         {{ content }}
       </template>
+      <div v-resize="{ dialog, width }" :class="{ 'service-dialog__resize': true, hidden: !resize || fullscreen }" />
     </div>
 
-    <template #footer>
+    <template #footer v-if="isVNode(_button) || _button?.length !== 0">
       <div class="service-dialog__footer">
         <component v-if="isVNode(_button)" :is="_button" />
         <component v-else v-for="item in _button" :is="generateBtn(item)" />
@@ -58,11 +60,17 @@ import { getAssetsImages } from './utils'
 import { isPlainObject, isFunction, isArray } from 'lodash'
 import store from './store'
 
+import Vresize from './resize'
+
+const vResize = Vresize
+
 const dialogVisible = ref(false)
+const dialog = ref<HTMLDivElement>()
 
 let iframeLoading: any
 
 const _height = ref('')
+
 const emit = defineEmits({
   destroy: () => true,
 })
@@ -81,9 +89,11 @@ const {
   afterClose,
   afterOpen,
   canModalClose,
+  resize
 } = props
 
 const fullscreen = ref(props.fullscreen)
+const width = ref(props.width)
 const height = ref(props.height)
 const title = ref(props.title)
 const buttons = ref(props.buttons)
@@ -134,6 +144,15 @@ watch(
   (val) => {
     height.value = val ? '100%' : _height.value
   }
+)
+
+watch(
+  () => height.value,
+  (val) => {
+    if (fullscreen.value) return
+    _height.value = val
+  },
+  {immediate: true}
 )
 
 function handleFullScreen() {
@@ -232,7 +251,8 @@ const exposeData = {
   title,
   buttons,
   fullscreen,
-  height
+  height,
+  width
 }
 defineExpose(exposeData)
 
@@ -240,7 +260,7 @@ store.setInstance('dialog', exposeData)
 
 onMounted(() => {
   dialogVisible.value = true
-  _height.value = height.value
+
   nextTick(() => {
     vm = store.getInstance('dialog')
   })
@@ -317,8 +337,7 @@ onMounted(() => {
     color: #333;
   }
   .el-dialog__footer {
-    padding: 10px 20px;
-    border-top: 1px solid #ebeef5;
+    padding: 0;
   }
 
   &.is-iframe {
@@ -332,12 +351,52 @@ onMounted(() => {
     box-sizing: border-box;
     overflow: auto;
   }
+
   &__footer {
+    padding: 10px 20px;
+    border-top: 1px solid #ebeef5;
     & > * {
       display: inline-block;
     }
     .el-button {
       font-size: 12px;
+    }
+  }
+
+  &__resize {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 13px;
+    height: 13px;
+    overflow: hidden;
+    cursor: nw-resize;
+    user-select: none;
+    opacity: 0;
+    &.hidden {
+      display: none;
+    }
+    &::after {
+      content: '';
+      opacity: 0.4;
+      transform: rotate(135deg);
+      position: absolute;
+      right: -3px;
+      bottom: 2px;
+      width: 24px;
+      height: 1px;
+      background: #000;
+    }
+    &::before {
+      content: '';
+      opacity: 0.4;
+      transform: rotate(135deg);
+      position: absolute;
+      right: -6px;
+      bottom: 0px;
+      width: 22px;
+      height: 1px;
+      background: #000;
     }
   }
 }

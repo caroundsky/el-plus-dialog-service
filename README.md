@@ -117,9 +117,22 @@ function showDialog() {
 | iframeSrc | string | — | iframe 地址 |
 | fullscreen | boolean | false | 默认最大化打开，与下方的 Enable 二选一 |
 | fullScreenEnable | boolean | true | 允许最大化 |
+| resize | boolean | false | 允许通过右下角自由缩放 |
 | beforeClose |fn|—|关闭前执行，此方法会阻止弹窗关闭，(vm, done) => {}|
 | afterOpen |fn|—|打开后执行，(vm) => {}|
 | afterClose |fn|—|关闭后执行，(vm) => {}|
+
+## Methods 实例方法
+
+| 方法名 | 说明 |
+| :---: | --- |
+| hide | 关闭当前弹窗 |
+| close | 关闭当前弹窗,会触发beforeClose方法 |
+| title | 标题 |
+| buttons | 按钮组 |
+| fullscreen | 全屏 |
+| height | 高度 |
+| width | 宽度 |
 
 ## appContext
 

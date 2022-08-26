@@ -1,5 +1,5 @@
 <template>
-  <div>demo</div>
+  <div style="height: 1000px">demo</div>
 </template>
 
 <script setup lang="tsx">
@@ -8,8 +8,7 @@ function save() {
 }
 
 function setBtn() {
-  // return <div>确认</div>
-  return []
+  return <div>确认</div>
 }
 
 defineExpose({
