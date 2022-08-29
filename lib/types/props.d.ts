@@ -86,6 +86,10 @@ export declare const dialogProps: {
         type: BooleanConstructor;
         default: boolean;
     };
+    resize: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     canModalClose: {
         type: BooleanConstructor;
         default: boolean;

@@ -1,7 +1,12 @@
 import { isVNode } from 'vue';
 import type { componentProps, BtnConfig, buttonPropsParams, getFooterBtnsFn } from './props';
 declare const _sfc_main: import("vue").DefineComponent<{}, {
+    vResize: {
+        mounted(el: HTMLDivElement, binding: any): void;
+        unmounted(): void;
+    };
     dialogVisible: import("vue").Ref<boolean>;
+    dialog: import("vue").Ref<HTMLDivElement | undefined>;
     iframeLoading: any;
     _height: import("vue").Ref<string>;
     emit: (event: "destroy") => void;
@@ -19,7 +24,9 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {
     afterClose: any;
     afterOpen: any;
     canModalClose: any;
+    resize: any;
     fullscreen: any;
+    width: any;
     height: any;
     title: any;
     buttons: any;
@@ -55,6 +62,7 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {
         buttons: any;
         fullscreen: any;
         height: any;
+        width: any;
     };
     ElDialog: import("element-plus/es/utils").SFCWithInstall<import("vue").DefineComponent<{
         readonly appendToBody: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, false, boolean>;
