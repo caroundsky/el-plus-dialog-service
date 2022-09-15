@@ -2,15 +2,10 @@
   <el-dialog
     draggable
     v-model="dialogVisible"
+    :class="bindClass"
     :width="width"
     :top="top"
     :z-index="zIndex"
-    :custom-class="
-      `service-dialog
-      ${customClass}
-      ${fullscreen ? 'fullscreen' : ''}
-      ${iframeSrc ? 'is-iframe' : ''}`
-    "
     :fullscreen="fullscreen"
     :before-close="handleBeforeClose"
     v-on="dialogEvents"
@@ -80,7 +75,6 @@ let vm: any = null
 const props = defineProps(dialogProps)
 const {
   content,
-  customClass,
   fullScreenEnable,
   iframeSrc,
   top,
@@ -89,7 +83,7 @@ const {
   afterClose,
   afterOpen,
   canModalClose,
-  resize
+  resize,
 } = props
 
 const fullscreen = ref(props.fullscreen)
@@ -97,6 +91,8 @@ const width = ref(props.width)
 const height = ref(props.height)
 const title = ref(props.title)
 const buttons = ref(props.buttons)
+
+const bindClass = ['service-dialog', props.class, { fullscreen: fullscreen.value, 'is-iframe': !!iframeSrc }]
 
 const dialogContent = ref<HTMLDivElement>()
 const dialogContentWrap = ref<HTMLDivElement>()
@@ -152,7 +148,7 @@ watch(
     if (fullscreen.value) return
     _height.value = val
   },
-  {immediate: true}
+  { immediate: true }
 )
 
 function handleFullScreen() {
