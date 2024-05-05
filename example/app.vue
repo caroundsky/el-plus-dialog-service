@@ -3,11 +3,11 @@
 </template>
 
 <script setup lang="tsx">
-import dialogService from 'dialog-service'
+import useDialog from 'dialog-service'
 import Demo from './demo.vue'
 
 function showDialog() {
-  dialogService({
+  useDialog({
     title: '测试',
     height: '30vh',
     // iframeSrc: 'https://juejin.cn/post/6918921604160290830',

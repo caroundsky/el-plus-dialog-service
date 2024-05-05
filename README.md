@@ -17,19 +17,28 @@ yarn add @caroundsky/el-plus-dialog-service
 * 使用
 
 ```js
-/**
- 接受两个配置项：
- - config - 必填，参考下方props
- - appContext - 可选，应用程序上下文，主要用于解决pinia等插件使用问题
-*/
-
-import dialogService from '@caroundsky/el-plus-dialog-service'
+// 入口文件 main.js
+import { createApp } from "vue"
+import useDialog from '@caroundsky/el-plus-dialog-service'
 
 // 若项目内未全局引入 element/el-dialog 样式，需要手动引入
 import 'element-plus/es/components/dialog/style/css'
 
-dialogService(config, appContext)
+const app = createApp(App)
+app.mount('#app')
 
+useDialog.initCtx(app._context)
+
+```
+
+```js
+/**
+ 接受配置项：
+ - config - 必填，参考下方props
+*/
+import useDialog from '@caroundsky/el-plus-dialog-service'
+
+useDialog(config)
 ```
 
 * 若将服务挂载到全局，并在选项式API中获得代码提示，需要在项目内xx.d.ts中声明相关变量
@@ -41,18 +50,20 @@ dialogService(config, appContext)
 
 // main.ts 入口文件，挂载到全局$dialogService
 import { createApp } from 'vue'
-import dialogService from '@caroundsky/el-plus-dialog-service'
+import useDialog from '@caroundsky/el-plus-dialog-service'
 import App from './xx.vue'
 
 const app = createApp(App)
-app.config.globalProperties.$dialogService = dialogService
+app.mount('#app')
+useDialog.initCtx(app._context)
+app.config.globalProperties.$useDialog = useDialog
 
 // xx.d.ts
 export {}
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    $dialogService: typeof import('@caroundsky/el-plus-dialog-service')['default']
+    $useDialog: typeof import('@caroundsky/el-plus-dialog-service')['default']
   }
 }
 
@@ -62,7 +73,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   methods: {
     showDialog() {
-      this.$dialogService(
+      this.$useDialog(
         {
           title: '标题',
           content: '内容',
@@ -88,10 +99,10 @@ export default defineComponent({
 */
 <script setup lang="tsx">
 import Demo from './demo.vue'
-import dialogService from '@caroundsky/el-plus-dialog-service'
+import useDialog from '@caroundsky/el-plus-dialog-service'
 
 function showDialog() {
-  dialogService({
+  useDialog({
     title: '测试',
     height: '40vh',
     content: <Demo />,
@@ -141,16 +152,3 @@ function showDialog() {
 | fullscreen | 全屏 |
 | height | 高度 |
 | width | 宽度 |
-
-## appContext
-
-参数为可选值，若项目内使用pinia作为store实例，需要配置该参数
-
-```js
-// 在你的 setup 方法中
-const { appContext } = getCurrentInstance()!
-dialogService({}, appContext)
-
-// 在选项式中
-dialogService({}, this.$.appContext)
-```
