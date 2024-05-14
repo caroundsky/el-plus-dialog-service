@@ -16,7 +16,7 @@ export declare const buttonProps: PropType<VNode<import("vue").RendererNode, imp
 export declare type buttonProps = ExtractPropTypes<typeof buttonProps>;
 interface BtnParam {
     vm: vm;
-    ctx: BtnParam | buttonProps;
+    ctx: Partial<ElButtonProps>;
     component?: any;
 }
 export declare type BtnFnConfig = (opt: BtnParam) => void;
